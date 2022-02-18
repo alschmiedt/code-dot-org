@@ -17,6 +17,12 @@ const pageComponents = [
   ProfessionalLearningProgramRequirements,
   AdditionalDemographicInformation
 ];
+const autoComputedFields = [
+  'cs_total_course_hours',
+  'regionalPartnerGroup',
+  'regionalPartnerId',
+  'regionalPartnerWorkshopIds'
+];
 
 const TeacherApplication = props => {
   const {
@@ -87,12 +93,7 @@ const TeacherApplication = props => {
     <FormController
       {...props}
       pageComponents={pageComponents}
-      autoComputedFields={[
-        'cs_total_course_hours',
-        'regionalPartnerGroup',
-        'regionalPartnerId',
-        'regionalPartnerWorkshopIds'
-      ]}
+      autoComputedFields={autoComputedFields}
       getPageProps={getPageProps}
       getInitialData={getInitialData}
       onSetPage={onSetPage}
