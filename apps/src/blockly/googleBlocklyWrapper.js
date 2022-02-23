@@ -23,7 +23,7 @@ import * as cdoUtils from './addons/cdoUtils';
 import initializeVariables from './addons/cdoVariables';
 import CdoVariableMap from './addons/cdoVariableMap';
 import CdoVerticalFlyout from './addons/cdoVerticalFlyout';
-import CdoWorkspaceSvg from './addons/cdoWorkspaceSvg';
+import './addons/cdoWorkspaceSvg';
 import initializeBlocklyXml from './addons/cdoXml';
 import initializeCss from './addons/cdoCss';
 import {UNKNOWN_BLOCK} from './addons/unknownBlock';
