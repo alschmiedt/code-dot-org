@@ -1,6 +1,8 @@
 !!! 5
 %html
   %head
+    = render inline: File.read(Rails.root.join('..', 'shared', 'haml', 'hoc_onetrust_cookie_scripts.haml')), type: :haml, locals: {dashboard: true}
+
     =view :theme_common_head_before
 
     -unless page_translated?
