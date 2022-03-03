@@ -5,8 +5,9 @@ import GoogleBlockly from 'blockly/core';
 GoogleBlockly.BlockSvg.prototype.canDisconnectFromParent_ = true;
 
 // I *think* this can be moved to a helper.
+const oldMixin = GoogleBlockly.BlockSvg.prototype.mixin;
 GoogleBlockly.BlockSvg.prototype.mixin = function(mixinObj, opt_disableCheck) {
-  this.mixin(mixinObj, true);
+  oldMixin(mixinObj, true);
 }
 
 // Should be able to remove when we remove not allowing disconnecting from child block.
@@ -69,11 +70,12 @@ GoogleBlockly.BlockSvg.prototype.isUserVisible = function() {
 }
 
 // Should be able to remove when we remove not allowing disconnecting from child block.
+const oldMouseDown = GoogleBlockly.BlockSvg.prototype.onMouseDown_;
 GoogleBlockly.BlockSvg.prototype.onMouseDown_ = function(e) {
   if (!Blockly.utils.isRightButton(e) && !this.canDisconnectFromParent_) {
     return;
   }
-  this.onMouseDown_(e);
+  oldMouseDown(e);
 }
 
 // Util? Not sure what this does other than gives it a different name.
