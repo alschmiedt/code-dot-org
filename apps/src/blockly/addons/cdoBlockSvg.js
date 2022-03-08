@@ -7,7 +7,7 @@ GoogleBlockly.BlockSvg.prototype.canDisconnectFromParent_ = true;
 // I *think* this can be moved to a helper.
 const oldMixin = GoogleBlockly.BlockSvg.prototype.mixin;
 GoogleBlockly.BlockSvg.prototype.mixin = function(mixinObj, opt_disableCheck) {
-  oldMixin(mixinObj, true);
+  oldMixin.call(this, mixinObj, true);
 }
 
 // Should be able to remove when we remove not allowing disconnecting from child block.
@@ -75,7 +75,7 @@ GoogleBlockly.BlockSvg.prototype.onMouseDown_ = function(e) {
   if (!Blockly.utils.isRightButton(e) && !this.canDisconnectFromParent_) {
     return;
   }
-  oldMouseDown(e);
+  oldMouseDown.call(this, e);
 }
 
 // Util? Not sure what this does other than gives it a different name.
@@ -89,5 +89,5 @@ GoogleBlockly.BlockSvg.prototype.getHexColour = function() {
 //     super(workspace, prototypeName, ++Blockly.uidCounter_); // Use counter instead of randomly generated IDs
 
 //     this.canDisconnectFromParent_ = true;
-//   }  
+//   }
 // }
