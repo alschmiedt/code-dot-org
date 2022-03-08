@@ -1,4 +1,5 @@
 export default function initializeGenerator(blocklyWrapper) {
+  // I believe internal to code.org.
   blocklyWrapper.JavaScript.translateVarName = function(name) {
     return Blockly.JavaScript.nameDB_.getName(
       name,
@@ -8,6 +9,7 @@ export default function initializeGenerator(blocklyWrapper) {
 
   // This function was a custom addition in CDO Blockly, so we need to add it here
   // so that our code generation logic still works with Google Blockly
+  // Internal to code.org
   blocklyWrapper.Generator.blockSpaceToCode = function(name, opt_typeFilter) {
     const generator = blocklyWrapper.getGenerator();
     generator.init(blocklyWrapper.mainBlockSpace);

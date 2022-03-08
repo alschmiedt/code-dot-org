@@ -1,39 +1,41 @@
 import GoogleBlockly from 'blockly/core';
 import {ToolboxType} from '../constants';
 
-export default class WorkspaceSvg extends GoogleBlockly.WorkspaceSvg {
-  registerGlobalVariables(variableList) {
-    this.globalVariables = variableList;
-    this.getVariableMap().addVariables(variableList);
-  }
+GoogleBlockly.WorkspaceSvg.prototype.registerGlobalVariables = function(variableList) {
+  this.globalVariables = variableList;
+  this.getVariableMap().addVariables(variableList);
+}
 
-  getContainer() {
-    return this.svgGroup_.parentNode;
-  }
+GoogleBlockly.WorkspaceSvg.prototype.getContainer = function() {
+  return this.svgGroup_.parentNode;
+}
 
-  clear() {
-    super.clear();
+const oldBlocklyClear = GoogleBlockly.WorkspaceSvg.prototype.clear;
 
-    // After clearing the workspace, we need to reinitialize global variables
-    // if there are any.
-    if (this.globalVariables) {
-      this.getVariableMap().addVariables(this.globalVariables);
-    }
-  }
+GoogleBlockly.WorkspaceSvg.prototype.clear = function() {
+  oldBlocklyClear.call(this);
 
-  isReadOnly() {
-    return false; // TODO - used for feedback
-  }
-
-  resize() {
-    super.resize();
-
-    if (this.getToolboxType() === ToolboxType.UNCATEGORIZED) {
-      this.flyout_.resize();
-    }
+  // After clearing the workspace, we need to reinitialize global variables
+  // if there are any.
+  if (this.globalVariables) {
+    this.getVariableMap().addVariables(this.globalVariables);
   }
 }
 
-WorkspaceSvg.prototype.events = {
+const oldBlocklyResize = GoogleBlockly.WorkspaceSvg.prototype.resize;
+
+// See the vertical flyout for an alternate potential workaround.
+GoogleBlockly.WorkspaceSvg.prototype.resize = function() {
+  oldBlocklyResize.call(this);
+  if (this.getToolboxType() === ToolboxType.UNCATEGORIZED) {
+    this.flyout_.resize();
+  }
+}
+
+GoogleBlockly.WorkspaceSvg.prototype.isReadOnly = function() {
+  return false;
+}
+
+GoogleBlockly.WorkspaceSvg.prototype.events = {
   dispatchEvent: () => {} // TODO
 };

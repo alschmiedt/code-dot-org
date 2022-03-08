@@ -85,6 +85,10 @@ export default class VerticalFlyout extends GoogleBlockly.VerticalFlyout {
     }
   }
 
+  // Eventually, I believe this can be moved to an override of the position method on the
+  // flyout. The position method gets called every time the workspace is resized.
+  // If you instead override that method you will not need to override the resize
+  // method on the workspace.
   resize() {
     if (!this.targetWorkspace) {
       return;
